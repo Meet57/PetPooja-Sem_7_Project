@@ -19,7 +19,7 @@ load = () => {
                         pendingSectionString += `
                         <div class="mt-3 col-3">
                             <div class="card p-0">
-                                <h5 class="card-header">Table ${ele.tablenumber}</h5>
+                                <h5 class="card-header p-3">Table ${ele.tablenumber}</h5>
                             <div class="card-body">
                         `
                     }
