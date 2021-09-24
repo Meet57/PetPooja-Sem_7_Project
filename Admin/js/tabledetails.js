@@ -43,5 +43,21 @@ load = () => {
     )
 }
 
+resetDetails = () => {
+    if (confirm("Want to reset this table")) {
+        $.post(
+            '../admin/php/resettable.php',
+            { tablenumber },
+            (data, response) => {
+                if (response === 'success') {
+                    load()
+                }
+            }
+        )
+    }
+}
+
+bill = `window.location = 'bill?tablenumber=${tablenumber}'`
+document.getElementById('makebill').setAttribute('onclick', bill)
 
 load()

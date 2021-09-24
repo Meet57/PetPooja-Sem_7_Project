@@ -1,39 +1,38 @@
-a{
-    text-decoration:none !important;
+a {
+    text-decoration: none !important;
     color: inherit;
 }
 
-a:hover{
-    text-decoration:none !important;
+a:hover {
+    text-decoration: none !important;
     color: inherit;
 }
 
-.blackbg{
+.blackbg {
     background-color: black;
     color: white;
 }
 
-.navi{
+.navi {
     position: fixed;
     width: 250px;
 }
 
-.main{
+.main {
     margin-left: 250px;
 }
 
-.height100{
+.height100 {
     height: 100vh !important;
 }
 
-.navitems{
+.navitems {}
+
+.active {
+    background-color: #818181;
 }
 
-.active{
-    background-color:#818181;
-}
-
-.foodtable{
+.foodtable {
     background-color: #818181;
     color: white;
     width: 200px;
