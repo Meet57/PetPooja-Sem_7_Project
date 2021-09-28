@@ -1,6 +1,9 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString)
 const tablenumber = urlParams.get('tablenumber')
+var fooditems = {}
+var myModal = new bootstrap.Modal(document.getElementById('AddFoodItem'))
+const searchfood = document.getElementById('search')
 
 load = () => {
     $.post(
@@ -25,7 +28,7 @@ load = () => {
                 grandtotal = 0
                 i = 1
                 data.forEach((ele) => {
-                    if(ele.quantity <= 0){
+                    if (ele.quantity <= 0) {
                         deletefromlist(ele.id)
                         return
                     }
@@ -48,7 +51,9 @@ load = () => {
                     grandtotal += Number.parseInt(ele.total)
                 })
 
-                table += '</table>'
+                table += `</table>
+                    <div class="text-end h5">Total : ${grandtotal}</div>
+                `
                 document.getElementById('table').innerHTML = table
             }
         }
@@ -91,5 +96,79 @@ deletefromlist = (id) => {
     )
 }
 
+loadfooditems = () => {
+    $.get(
+        '../manager/php/fooditems.php',
+        (data, response) => {
+            if (response === 'success') {
+                data = JSON.parse(data)
+                fooditems = data
+                htmlwriteup = ``
+                data.forEach(food => {
+                    htmlwriteup += `
+                        <div class="col-auto m-2 btn rounded-pill bg-primary bg-gradient text-white" onclick="addFoodItem(${food.id})">
+                            ${food.name}
+                        </div>
+                    `
+                });
+                $('#fooditems').html(htmlwriteup)
+            }
+        }
+    )
+}
+
+// $sql = sprintf($format, $_POST['foodid'],$_POST['fooditem'],$_POST['foodprice'],1,$_POST['foodprice'],$_POST['tablenumber'],0);
+
+addFoodItem = (id) => {
+    food = fooditems.find((item) => item.id == id)
+    foodid = food.id
+    fooditem = food.name
+    foodprice = food.price
+
+    $.post(
+        '../manager/php/addfooditem.php',
+        { foodid, fooditem, foodprice, tablenumber },
+        (data, response) => {
+            if (response === 'success') {
+                load()
+            }
+        }
+    )
+
+    $('#search').val("")
+    searchFood()
+    $('.modal-backdrop').remove();
+    myModal.hide();
+}
+
+searchFood = () => {
+    keyword = $('#search').val().toUpperCase()
+    if (keyword.length == 0) {
+        htmlwriteup = ``
+        fooditems.forEach(food => {
+            htmlwriteup += `
+                        <div class="col-auto m-2 btn rounded-pill bg-primary bg-gradient text-white" onclick="addFoodItem(${food.id})">
+                            ${food.name}
+                        </div>
+                    `
+        });
+        $('#fooditems').html(htmlwriteup)
+    } else {
+        htmlwriteup = ``
+        fooditems.forEach(food => {
+            let foodname = food.name
+            if (foodname.toUpperCase().indexOf(keyword.toUpperCase()) !== -1) {
+                htmlwriteup += `
+                        <div class="col-auto m-2 btn rounded-pill bg-primary bg-gradient text-white" onclick="addFoodItem(${food.id})">
+                            ${food.name}
+                        </div>
+                    `
+            }
+        });
+        $('#fooditems').html(htmlwriteup)
+    }
+}
+
 load()
+loadfooditems()
 $('#tablenumber').html(`Table ${tablenumber}`)

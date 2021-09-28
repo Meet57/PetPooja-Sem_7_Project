@@ -14,11 +14,44 @@
 </head>
 
 <body>
-    
+
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-auto mx-auto display-5" id="tablenumber">
                 Table 1
+            </div>
+        </div>
+        <div class="row">
+            <!-- Button trigger modal -->
+            <div class="col-auto ms-auto">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddFoodItem">
+                    Add Food Item
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="AddFoodItem" tabindex="-1" aria-labelledby="AddFoodItemLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="AddFoodItemLabel">Add Food</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" class="form-control" placeholder="Search Food Item" id="search" onkeyup="searchFood()" autocomplete="off">
+                            <hr>
+                            <div class="fooditem" id="fooditems">
+                                <div class="col-auto btn rounded-pill bg-primary bg-gradient text-white">
+                                    Paneer Tikka
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
