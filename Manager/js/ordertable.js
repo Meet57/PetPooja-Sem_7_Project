@@ -112,6 +112,7 @@ loadfooditems = () => {
                     `
                 });
                 $('#fooditems').html(htmlwriteup)
+                // document.getElementById('footitems').innerHTML = htmlwriteup
             }
         }
     )
@@ -135,6 +136,7 @@ addFoodItem = (id) => {
         }
     )
 
+    // To remove model from the page
     $('#search').val("")
     searchFood()
     $('.modal-backdrop').remove();
@@ -157,7 +159,7 @@ searchFood = () => {
         htmlwriteup = ``
         fooditems.forEach(food => {
             let foodname = food.name
-            if (foodname.toUpperCase().indexOf(keyword.toUpperCase()) !== -1) {
+            if (foodname.toUpperCase().indexOf(keyword) !== -1) {
                 htmlwriteup += `
                         <div class="col-auto m-2 btn rounded-pill bg-primary bg-gradient text-white" onclick="addFoodItem(${food.id})">
                             ${food.name}
