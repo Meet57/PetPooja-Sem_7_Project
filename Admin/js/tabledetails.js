@@ -57,7 +57,7 @@ resetDetails = () => {
     }
 }
 
-bill = `window.location = 'bill?tablenumber=${tablenumber}'`
+bill = `window.location = 'bill.html?tablenumber=${tablenumber}'`
 document.getElementById('makebill').setAttribute('onclick', bill)
 
 load()
