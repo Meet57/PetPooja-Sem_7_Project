@@ -21,7 +21,7 @@ load = () => {
                             <td>${ele.name}</td>
                             <td>${ele.price}</td>
                             <td>
-                                <a href="editfood?id=${ele.id}"><img src="../admin/assests/edit.svg" alt="" /><a>
+                                <a href="editfood.html?id=${ele.id}"><img src="../admin/assests/edit.svg" alt="" /><a>
                                 <img
                                     src="../admin/assests/delete.svg"
                                     class="ms-3"
